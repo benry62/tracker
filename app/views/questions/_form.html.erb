@@ -1,0 +1,57 @@
+<%= form_with(model: question, local: true) do |form| %>
+  <% if question.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(question.errors.count, "error") %> prohibited this question from being saved:</h2>
+
+      <ul>
+      <% question.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :max_score %>
+    <%= form.number_field :max_score, id: :question_max_score %>
+  </div>
+
+  <div class="field">
+    <%= form.label :paper_id %>
+    <%= form.number_field :paper_id, id: :question_paper_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_field :content, id: :question_content %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tier %>
+    <%= form.text_field :tier, id: :question_tier %>
+  </div>
+
+  <div class="field">
+    <%= form.label :strand %>
+    <%= form.text_field :strand, id: :question_strand %>
+  </div>
+
+  <div class="field">
+    <%= form.label :summary %>
+    <%= form.text_field :summary, id: :question_summary %>
+  </div>
+
+  <div class="field">
+    <%= form.label :MW_number %>
+    <%= form.text_field :MW_number, id: :question_MW_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :MW_text %>
+    <%= form.text_field :MW_text, id: :question_MW_text %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

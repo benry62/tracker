@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180331012040) do
+ActiveRecord::Schema.define(version: 20180404200549) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,6 +18,19 @@ ActiveRecord::Schema.define(version: 20180331012040) do
   create_table "papers", force: :cascade do |t|
     t.string "name"
     t.integer "test_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.integer "max_score"
+    t.integer "paper_id"
+    t.string "content"
+    t.string "tier"
+    t.string "strand"
+    t.string "summary"
+    t.string "MW_number"
+    t.string "MW_text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -31,4 +44,5 @@ ActiveRecord::Schema.define(version: 20180331012040) do
   end
 
   add_foreign_key "papers", "tests"
+  add_foreign_key "questions", "papers"
 end

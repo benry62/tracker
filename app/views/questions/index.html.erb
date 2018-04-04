@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Questions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Max score</th>
+      <th>Paper</th>
+      <th>Content</th>
+      <th>Tier</th>
+      <th>Strand</th>
+      <th>Summary</th>
+      <th>Mw number</th>
+      <th>Mw text</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @questions.each do |question| %>
+      <tr>
+        <td><%= question.max_score %></td>
+        <td><%= question.paper_id %></td>
+        <td><%= question.content %></td>
+        <td><%= question.tier %></td>
+        <td><%= question.strand %></td>
+        <td><%= question.summary %></td>
+        <td><%= question.MW_number %></td>
+        <td><%= question.MW_text %></td>
+        <td><%= link_to 'Show', question %></td>
+        <td><%= link_to 'Edit', edit_question_path(question) %></td>
+        <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Question', new_question_path %>

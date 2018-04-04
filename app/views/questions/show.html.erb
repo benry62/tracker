@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Max score:</strong>
+  <%= @question.max_score %>
+</p>
+
+<p>
+  <strong>Paper:</strong>
+  <%= @question.paper_id %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @question.content %>
+</p>
+
+<p>
+  <strong>Tier:</strong>
+  <%= @question.tier %>
+</p>
+
+<p>
+  <strong>Strand:</strong>
+  <%= @question.strand %>
+</p>
+
+<p>
+  <strong>Summary:</strong>
+  <%= @question.summary %>
+</p>
+
+<p>
+  <strong>Mw number:</strong>
+  <%= @question.MW_number %>
+</p>
+
+<p>
+  <strong>Mw text:</strong>
+  <%= @question.MW_text %>
+</p>
+
+<%= link_to 'Edit', edit_question_path(@question) %> |
+<%= link_to 'Back', questions_path %>
