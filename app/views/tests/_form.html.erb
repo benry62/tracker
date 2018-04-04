@@ -10,14 +10,17 @@
       </ul>
     </div>
   <% end %>
-<p>woooo</p>
   <div class="field">
     <%= form.label :name %>
     <%= form.text_field :name, id: :test_name %>
   </div>
   <div class="field">
+    <%= form.label :level %>
+    <%= form.select :level, [['GCSE','GCSE'],['Yr 10','Yr 10'], ['Yr 9','Yr 9'],['Delta 3','Delta 3'], ['Theta 3','Theta 3'], ['Pi 3','Pi 3'], ['Delta 2','Delta 2'], ['Theta 2','Theta 2'], ['Pi 2','Pi 2'], ['Delta 1','Delta 1'], ['Theta 1','Theta 1'], ['Pi 1','Pi 1']] %>
+  </div>
+  <div class="field">
     <%= form.label :tier %>
-    <%= form.text_field :tier, id: :test_tier %>
+    <%= form.select :tier, [['Higher','Higher'],['Foundation','Foundation'],['n/a','0']] %>
   </div>
   <div class="actions">
     <%= form.submit %>

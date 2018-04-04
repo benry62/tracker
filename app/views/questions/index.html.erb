@@ -5,11 +5,10 @@
 <table>
   <thead>
     <tr>
+      <th>Number</th>
+      <th>Order</th>
       <th>Max score</th>
       <th>Paper</th>
-      <th>Content</th>
-      <th>Tier</th>
-      <th>Strand</th>
       <th>Summary</th>
       <th>Mw number</th>
       <th>Mw text</th>
@@ -20,11 +19,10 @@
   <tbody>
     <% @questions.each do |question| %>
       <tr>
+        <td><%= question.question_number %></td>
+        <td><%= question.order %></td>
         <td><%= question.max_score %></td>
-        <td><%= question.paper_id %></td>
-        <td><%= question.content %></td>
-        <td><%= question.tier %></td>
-        <td><%= question.strand %></td>
+        <td><%= question.paper.name %></td>
         <td><%= question.summary %></td>
         <td><%= question.MW_number %></td>
         <td><%= question.MW_text %></td>

@@ -12,30 +12,38 @@
   <% end %>
 
   <div class="field">
+    <%= form.label :question_number %>
+    <%= form.text_field :question_number, id: :question_question_number %>
+  </div>
+
+  <div class="field">
     <%= form.label :max_score %>
     <%= form.number_field :max_score, id: :question_max_score %>
   </div>
 
   <div class="field">
     <%= form.label :paper_id %>
-    <%= form.number_field :paper_id, id: :question_paper_id %>
+    <%= form.collection_select(:paper_id, Paper.all, :id, :name, prompt: true ) %></p>
   </div>
 
+<% unless @question.new_record? %>
+  <div class="field">
+    <%= form.label :order %>
+    <%= form.number_field :order, id: :question_order %>
+  </div>
+<% end %>
+<!--
   <div class="field">
     <%= form.label :content %>
     <%= form.text_field :content, id: :question_content %>
-  </div>
+  </div>-->
 
-  <div class="field">
-    <%= form.label :tier %>
-    <%= form.text_field :tier, id: :question_tier %>
-  </div>
-
+<!--
   <div class="field">
     <%= form.label :strand %>
     <%= form.text_field :strand, id: :question_strand %>
   </div>
-
+-->
   <div class="field">
     <%= form.label :summary %>
     <%= form.text_field :summary, id: :question_summary %>

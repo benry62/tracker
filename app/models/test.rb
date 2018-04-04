@@ -3,6 +3,7 @@ class Test < ApplicationRecord
 
   validates :name, presence: true
   validates :tier, presence: true
+  validates :level, presence: true
 
 
 end

@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
   # GET /questions
   # GET /questions.json
   def index
-    @questions = Question.all
+    @questions = Question.order(:order)
   end
 
   # GET /questions/1
@@ -25,7 +25,7 @@ class QuestionsController < ApplicationController
   # POST /questions.json
   def create
     @question = Question.new(question_params)
-
+    @question.order = Question.increment_order(Question.last)
     respond_to do |format|
       if @question.save
         format.html { redirect_to @question, notice: 'Question was successfully created.' }
@@ -69,6 +69,6 @@ class QuestionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:max_score, :paper_id, :content, :tier, :strand, :summary, :MW_number, :MW_text)
+      params.require(:question).permit(:max_score, :paper_id, :content, :tier, :strand, :summary, :MW_number, :MW_text, :question_number, :order)
     end
 end

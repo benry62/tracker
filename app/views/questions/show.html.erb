@@ -1,29 +1,26 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Question number:</strong>
+  <%= @question.question_number %>
+</p>
+
+<p>
   <strong>Max score:</strong>
   <%= @question.max_score %>
 </p>
 
 <p>
+  <strong>Order:</strong>
+  <%= @question.order %>
+</p>
+
+<p>
   <strong>Paper:</strong>
-  <%= @question.paper_id %>
+  <%= @question.paper.name %>
 </p>
 
-<p>
-  <strong>Content:</strong>
-  <%= @question.content %>
-</p>
 
-<p>
-  <strong>Tier:</strong>
-  <%= @question.tier %>
-</p>
-
-<p>
-  <strong>Strand:</strong>
-  <%= @question.strand %>
-</p>
 
 <p>
   <strong>Summary:</strong>
