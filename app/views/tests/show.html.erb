@@ -13,5 +13,14 @@
   <%= @test.tier %>
 </p>
 
+<h3>Papers</h3>
+<% @papers.each do |paper| %>
+  <p><%= link_to paper.name, paper_url(paper.id)  %></p>
+<% end %>
+
+
+
+
+
 <%= link_to 'Edit', edit_test_path(@test) %> |
 <%= link_to 'Back', tests_path %>

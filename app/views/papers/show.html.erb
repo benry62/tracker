@@ -35,9 +35,67 @@
     <% end %>
   </tbody>
 </table>
+
 <p>
   <%= link_to "Printable Form (PDF)", paper_path(@paper, format: 'pdf') %>
 </p>
 
 <%= link_to 'Edit', edit_paper_path(@paper) %> |
 <%= link_to 'Back', papers_path %>
+
+
+<p><%= link_to "Add new question", new_question_path(@paper) %></p>
+
+
+<%= form_with(model: @question, local: true) do |form| %>
+  <% if @question.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(question.errors.count, "error") %> prohibited this question from being saved:</h2>
+
+      <ul>
+      <% @question.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :question_number %>
+    <%= form.text_field :question_number, id: :question_question_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :max_score %>
+    <%= form.number_field :max_score, id: :question_max_score %>
+  </div>
+
+  <%= form.hidden_field :paper_id %>
+
+
+<% unless @question.new_record? %>
+  <div class="field">
+    <%= form.label :order %>
+    <%= form.number_field :order, id: :question_order %>
+  </div>
+<% end %>
+
+  <div class="field">
+    <%= form.label :summary %>
+    <%= form.text_field :summary, id: :question_summary %>
+  </div>
+
+  <div class="field">
+    <%= form.label :MW_number, "MathsWatch number"  %>
+    <%= form.text_field :MW_number, id: :question_MW_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :MW_text, "MathsWatch details" %>
+    <%= form.text_field :MW_text, id: :question_MW_text %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180405120816) do
+ActiveRecord::Schema.define(version: 20180405165520) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "assignments", force: :cascade do |t|
+    t.bigint "paper_id"
+    t.bigint "student_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["paper_id"], name: "index_assignments_on_paper_id"
+    t.index ["student_id"], name: "index_assignments_on_student_id"
+  end
 
   create_table "class_group_users", force: :cascade do |t|
     t.bigint "user_id"
@@ -88,6 +97,8 @@ ActiveRecord::Schema.define(version: 20180405120816) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "assignments", "papers"
+  add_foreign_key "assignments", "students"
   add_foreign_key "class_group_users", "class_groups"
   add_foreign_key "class_group_users", "users"
   add_foreign_key "papers", "tests"

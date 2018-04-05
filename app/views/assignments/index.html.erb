@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Assignments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Student</th>
+      <th>Paper</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @assignments.each do |assignment| %>
+      <tr>
+        <td><%= assignment.student_id %></td>
+        <td><%= assignment.paper_id %></td>
+        <td><%= link_to 'Show', assignment %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Assignment', new_assignment_path %>

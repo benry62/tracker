@@ -1,5 +1,6 @@
 class ResultsController < ApplicationController
   before_action :set_result, only: [:show, :edit, :update, :destroy]
+  require 'roo'
 
   # GET /results
   # GET /results.json
@@ -11,6 +12,12 @@ class ResultsController < ApplicationController
       format.xls
     end
   end
+
+  def import
+    Result.import(params[:file])
+    redirect_to results_url, notice: 'Results imported.'
+  end
+
 
   # GET /results/1
   # GET /results/1.json

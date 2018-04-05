@@ -1,5 +1,6 @@
 class TestsController < ApplicationController
   before_action :set_test, only: [:show, :edit, :update, :destroy]
+  before_action :find_papers, only: [:show, :edit, :update, :destroy]
 
   # GET /tests
   # GET /tests.json
@@ -65,6 +66,10 @@ class TestsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_test
       @test = Test.find(params[:id])
+    end
+
+    def find_papers
+      @papers = @test.papers
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

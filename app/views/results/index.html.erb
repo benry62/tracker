@@ -1,6 +1,15 @@
 <p id="notice"><%= notice %></p>
 
+
 <h1>Results</h1>
+
+<p>
+  Download:
+  <%= link_to "CSV", results_path(format: "csv") %> |
+  <%= link_to "Excel", results_path(format: "xls") %>
+</p>
+
+
 
 <table>
   <thead>
@@ -38,9 +47,12 @@
 
 <br>
 
-<%= link_to 'New Result', new_result_path %>
+<p><%= link_to 'New Result', new_result_path %></p>
+
 <p>
-  Download:
-  <%= link_to "CSV", results_path(format: "csv") %> |
-  <%= link_to "Excel", results_path(format: "xls") %>
+<h2>Import Results</h2>
+<%= form_tag import_results_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import" %>
+<% end %>
 </p>

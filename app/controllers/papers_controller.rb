@@ -12,6 +12,9 @@ class PapersController < ApplicationController
   # GET /papers/1.json
   def show
     @paper = Paper.find(params[:id])
+    @question = Question.new
+    @question.paper_id = @paper.id
+
     respond_to do |format|
       format.html
       format.pdf do
@@ -38,7 +41,6 @@ class PapersController < ApplicationController
   # POST /papers.json
   def create
     @paper = Paper.new(paper_params)
-
     respond_to do |format|
       if @paper.save
         format.html { redirect_to @paper, notice: 'Paper was successfully created.' }
