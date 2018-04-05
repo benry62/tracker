@@ -10,6 +10,7 @@ class Question < ApplicationRecord
   validates :order, uniqueness: { scope: :paper }
 
   belongs_to :paper
+  has_many :results
 
 
   def self.increment_order(question)

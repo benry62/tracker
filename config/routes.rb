@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
 
+  root 'tests#index'
+
+
+  resources :results
   resources :students
   resources :users
   resources :class_groups
-  root 'tests#index'
-
   resources :questions
   resources :tests
   resources :papers

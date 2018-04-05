@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180405114653) do
+ActiveRecord::Schema.define(version: 20180405120816) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,16 @@ ActiveRecord::Schema.define(version: 20180405114653) do
     t.index ["paper_id"], name: "index_questions_on_paper_id"
   end
 
+  create_table "results", force: :cascade do |t|
+    t.bigint "student_id"
+    t.bigint "question_id"
+    t.integer "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_results_on_question_id"
+    t.index ["student_id"], name: "index_results_on_student_id"
+  end
+
   create_table "students", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -82,5 +92,7 @@ ActiveRecord::Schema.define(version: 20180405114653) do
   add_foreign_key "class_group_users", "users"
   add_foreign_key "papers", "tests"
   add_foreign_key "questions", "papers"
+  add_foreign_key "results", "questions"
+  add_foreign_key "results", "students"
   add_foreign_key "students", "class_groups"
 end

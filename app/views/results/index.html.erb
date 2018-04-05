@@ -1,0 +1,46 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Results</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Last Name</th>
+      <th>First Name</th>
+      <th>Test</th>
+      <th>Paper</th>
+      <th>Question</th>
+      <th>Question summary</th>
+      <th>Score</th>
+      <th>Percent</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @results.each do |r| %>
+      <tr>
+        <td><%= r.student.last_name %></td>
+        <td><%= r.student.first_name %></td>
+        <td><%= r.question.paper.test.name %></td>
+        <td><%= r.question.paper.name %></td>
+        <td><%= r.question.question_number %></td>
+        <td><%= r.question.summary %></td>
+        <td><%= r.score %></td>
+        <td>% in here</td>
+        <td><%= link_to 'Show', r %></td>
+        <td><%= link_to 'Edit', edit_result_path(r) %></td>
+        <td><%= link_to 'Destroy', r, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Result', new_result_path %>
+<p>
+  Download:
+  <%= link_to "CSV", results_path(format: "csv") %> |
+  <%= link_to "Excel", results_path(format: "xls") %>
+</p>
