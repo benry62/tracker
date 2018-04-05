@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  root 'tests#home'
+  resources :users
+  resources :class_groups
+  root 'tests#index'
 
   resources :questions
   resources :tests
