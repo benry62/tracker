@@ -7,7 +7,36 @@
 
 <p>
   <strong>Test:</strong>
-  <%= @paper.test_id %>
+  <%= @paper.test.name %>
+</p>
+
+<h3>Questions</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Number</th>
+      <th>Max score</th>
+      <th>Summary</th>
+      <th>MW number</th>
+      <th>MW text</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @questions.each do |question| %>
+      <tr>
+        <td><%= question.question_number %></td>
+        <td><%= question.max_score %></td>
+        <td><%= question.summary %></td>
+        <td><%= question.MW_number %></td>
+        <td><%= question.MW_text %></td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<p>
+  <%= link_to "Printable Form (PDF)", paper_path(@paper, format: 'pdf') %>
 </p>
 
 <%= link_to 'Edit', edit_paper_path(@paper) %> |

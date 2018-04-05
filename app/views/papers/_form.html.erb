@@ -18,8 +18,9 @@
 
   <div class="field">
     <%= form.label :test_id %>
-    <%= form.number_field :test_id, id: :paper_test_id %>
+    <%= form.collection_select(:test_id, Test.all, :id, :name, prompt: true ) %></p>
   </div>
+
 
   <div class="actions">
     <%= form.submit %>

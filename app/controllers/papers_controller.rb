@@ -1,5 +1,6 @@
 class PapersController < ApplicationController
   before_action :set_paper, only: [:show, :edit, :update, :destroy]
+  before_action :find_questions, only: [:show]
 
   # GET /papers
   # GET /papers.json
@@ -10,7 +11,19 @@ class PapersController < ApplicationController
   # GET /papers/1
   # GET /papers/1.json
   def show
+    @paper = Paper.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = PaperPdf.new(@paper)
+        send_data pdf.render,
+                  filename: "paper_#{@paper.name}",
+                  type: 'application/pdf',
+                  disposition: 'inline'
+        end
+    end
   end
+
 
   # GET /papers/new
   def new
@@ -65,6 +78,10 @@ class PapersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_paper
       @paper = Paper.find(params[:id])
+    end
+
+    def find_questions
+      @questions = Question.where("paper_id = :paper_id", {paper_id: @paper.id}).order(order: :asc)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
