@@ -17,7 +17,7 @@ class PapersController < ApplicationController
       format.pdf do
         pdf = PaperPdf.new(@paper)
         send_data pdf.render,
-                  filename: "paper_#{@paper.name}",
+                  filename: "#{@paper.test.name}_#{@paper.name}",
                   type: 'application/pdf',
                   disposition: 'inline'
         end

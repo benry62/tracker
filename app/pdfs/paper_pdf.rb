@@ -16,15 +16,16 @@ class PaperPdf < Prawn::Document
     move_down 20
     table line_item_rows do
       row(0).font_style = :bold
-      columns(1..3).align = :center
+      columns(1..4).align = :center
+      columns(3).align = :left
       self.header = true
     end
   end
 
   def line_item_rows
-    [["Number", "Max Score", "MW video", "MW number"]] +
+    [["Number", "Max \nScore", "Your \nScore", "MW \nvideo", "MW \nnumber", "Date \nCompleted"]] +
     @paper.questions.map do |item|
-      [item.question_number, item.max_score, item.MW_text, item.MW_number]
+      [item.question_number, item.max_score, '', item.MW_text, item.MW_number, '']
     end
   end
 
