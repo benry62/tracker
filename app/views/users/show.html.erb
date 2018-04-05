@@ -10,5 +10,13 @@
   <%= @user.department %>
 </p>
 
+<p>
+  <strong>Classes:</strong>
+  <% @user.class_groups.each do |u| %>
+    <p><%= u.name %></p>
+    <% end %>
+</p>
+
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

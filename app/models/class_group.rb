@@ -5,6 +5,7 @@ class ClassGroup < ApplicationRecord
   validates :year, numericality: { only_integer: true }
 
   has_many :class_group_users
+  has_many :students
   has_many :users, :through => :class_group_users
 
 
