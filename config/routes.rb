@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  root 'tests#home'
+
   resources :questions
   resources :tests
   resources :papers
