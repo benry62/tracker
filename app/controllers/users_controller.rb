@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :find_classes, only: [:show, :edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
@@ -67,8 +68,13 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
     end
 
+    def find_classes
+      @classes = ClassGroup.order(:year)
+    end
+
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :department)
+      params.require(:user).permit({:class_group_ids=>[]}, :department, :name)
     end
 end

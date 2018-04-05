@@ -21,6 +21,18 @@
     <%= form.text_field :department, id: :user_department %>
   </div>
 
+  <h3> Assign to class </h3>
+
+  <%= hidden_field_tag "user[class_group_ids][]", nil %>
+  <% ClassGroup.all.each do |class_group| %>
+  <p>  <div class="inline-field">
+      <%= check_box_tag "user[class_group_ids][]", class_group.id, @user.class_group_ids.include?(class_group.id), id: dom_id(class_group) %>
+      <%= label_tag dom_id(class_group), class_group.name %>
+    </div> </p>
+  <% end %>
+
+
+
   <div class="actions">
     <%= form.submit %>
   </div>
