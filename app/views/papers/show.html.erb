@@ -27,7 +27,7 @@
       <tr>
         <td><%= question.question_number %></td>
         <td><%= question.max_score %></td>
-        <td><%= question.summary %></td>
+        <td><%= link_to question.summary, edit_question_path(question) %></td>
         <td><%= question.MW_number %></td>
         <td><%= question.MW_text %></td>
 

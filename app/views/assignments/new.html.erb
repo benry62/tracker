@@ -1,2 +1,30 @@
-<h1>Assignments#new</h1>
-<p>Find me in app/views/assignments/new.html.erb</p>
+<h1>New Assignment</h1>
+
+<%= form_with(model: @assignment, local: true) do |form| %>
+
+
+<p> <%= form.collection_select(:test_id, Test.all, :id, :name, prompt: true ) %></p>
+
+
+<% ClassGroup.all.each do |class_group| %>
+  <p>
+    <div class="inline-field">
+      <%= check_box_tag "assignment[class_group_ids][]", class_group.id, ClassGroup.all, id: dom_id(class_group) %>
+      <%= label_tag dom_id(class_group), class_group.name %>
+    </div>
+  </p>
+<% end %>
+
+
+
+
+
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+
+
+<% end %>
+
+collection_check_boxes(:assignment, :class_groups_ids, ClassGroup.all, :id, :name)
