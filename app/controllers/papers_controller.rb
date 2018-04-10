@@ -14,6 +14,9 @@ class PapersController < ApplicationController
     @paper = Paper.find(params[:id])
     @question = Question.new
     @question.paper_id = @paper.id
+    @questions = @paper.questions.order(:order)
+    @assignment = Assignment.find(params[:assignment_id])
+    @students = @assignment.class_group.students.order(:last_name)
 
     respond_to do |format|
       format.html
@@ -24,6 +27,8 @@ class PapersController < ApplicationController
                   type: 'application/pdf',
                   disposition: 'inline'
         end
+      format.csv { send_data @paper.to_csv(@questions, @students) }
+      format.xls
     end
   end
 

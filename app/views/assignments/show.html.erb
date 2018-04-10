@@ -5,11 +5,27 @@
 <h3><%= @assignment.test.name %></h3>
 
 <h3><%= @assignment.class_group.name %></h3>
-
+<h4> Students</h4>
+<ol>
 <% @assignment.class_group.students.each do |s| %>
-<p> <%= s.first_name %> <%= s.last_name %></p>
-
+  <li> <%= s.first_name %> <%= s.last_name %></li>
 <% end %>
+</ol>
+<h4>Papers</h4>
+<ol>
+  <% @assignment.test.papers.each do |p| %>
+    <li> <h4><%= p.name %></h4></li>
+    <ol>
+      <% p.questions.each do |q| %>
+        <li><%= q.summary %></li>
+      <% end %>
+    </ol>
+    <p>
+      Download markbook:
+      <%= link_to "CSV", assignment_paper_path(@assignment, p, format: "csv") %> |
+      <%= link_to "Excel", assignment_paper_path(@assignment, p, format: "xls") %>
+    </p>  <% end %>
+</ol>
 
 
 <%= link_to 'Back', assignments_path %>
