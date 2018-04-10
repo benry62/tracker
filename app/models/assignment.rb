@@ -22,14 +22,6 @@ class Assignment < ApplicationRecord
       end
     end
 
-  #  (3..spreadsheet.last_row).each do |i|
-  #    row = Hash[[header, spreadsheet.row(i)].transpose]
-      # student = find_by(id: row["student_id"])
-      debugger
-
-      #product.attributes = row.to_hash
-      #product.save!
-  #  end
   end
 
 

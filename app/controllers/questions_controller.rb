@@ -4,7 +4,8 @@ class QuestionsController < ApplicationController
   # GET /questions
   # GET /questions.json
   def index
-    @questions = Question.order(:order)
+
+    @questions = Question.order(paper_id: :asc, order: :asc)
   end
 
   # GET /questions/1
@@ -25,7 +26,7 @@ class QuestionsController < ApplicationController
   # POST /questions.json
   def create
     @question = Question.new(question_params)
-    @question.order = Question.increment_order(Question.last)
+    @question.order = Question.increment_order(@question)
     respond_to do |format|
       if @question.save
         format.html { redirect_to @question, notice: 'Question was successfully created.' }
