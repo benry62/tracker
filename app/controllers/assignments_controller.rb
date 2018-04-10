@@ -13,6 +13,12 @@ class AssignmentsController < ApplicationController
     @students = @assignment.class_group.students
   end
 
+  def import
+    Assignment.import(params[:file])
+    redirect_to results_url, notice: 'Results imported.'
+  end
+
+
 
   # GET /assignments/new
   def new

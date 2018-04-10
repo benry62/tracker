@@ -17,7 +17,7 @@ class PapersController < ApplicationController
     @questions = @paper.questions.order(:order)
     @assignment = Assignment.find(params[:assignment_id])
     @students = @assignment.class_group.students.order(:last_name)
-
+    file_name = "#{@assignment.class_group.name}_#{@paper.test.name}_#{@paper.name}.xlsx"
     respond_to do |format|
       format.html
       format.pdf do
@@ -28,7 +28,10 @@ class PapersController < ApplicationController
                   disposition: 'inline'
         end
       format.csv { send_data @paper.to_csv(@questions, @students), filename: "#{@assignment.class_group.name}_#{@paper.test.name}_#{@paper.name}"}
-      format.xls
+      format.xlsx {
+  response.headers['Content-Disposition'] = 'attachment; filename="' + file_name + '"'
+}
+
     end
   end
 

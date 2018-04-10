@@ -8,11 +8,12 @@ Rails.application.routes.draw do
   resources :questions
   resources :tests
   resources :papers
+
   resources :assignments do
     resources :papers
   end
 
-  resources :results do
+  resources :results, :assignments do
     collection do
       post :import
     end

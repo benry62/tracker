@@ -1,0 +1,28 @@
+wb = xlsx_package.workbook
+  wb.styles do |s|
+  head = s.add_style  :bg_color => "00",
+                      :fg_color => "FF",
+                      :b => true,
+                      :alignment => { :horizontal => :center,
+                                      :wrap_text => false}
+
+   wb.add_worksheet(name: "Paper") do |sheet|
+   id_row = ['', '', '']
+   @questions.each do |q|
+      id_row << q.id
+   end
+   question_row = ["student_id", "last_name", "first_name"]
+   @questions.each do |q|
+      question_row << q.question_number
+   end
+   sheet.add_row id_row
+   sheet.add_row question_row
+   @students.each do |s|
+      sheet.add_row [s.id, s.last_name, s.first_name]
+   end
+
+   # apply the head style to the first row.
+   sheet.row_style 0, head
+   sheet.row_style 1, head
+  end
+end
