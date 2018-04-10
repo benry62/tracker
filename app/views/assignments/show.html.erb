@@ -2,10 +2,14 @@
 
 <h2>Assignment</h2>
 
-<h3><%= @assignment.paper.name %></h3>
+<h3><%= @assignment.test.name %></h3>
 
+<h3><%= @assignment.class_group.name %></h3>
 
+<% @assignment.class_group.students.each do |s| %>
+<p> <%= s.first_name %> <%= s.last_name %></p>
 
+<% end %>
 
 
 <%= link_to 'Back', assignments_path %>

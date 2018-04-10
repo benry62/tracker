@@ -10,7 +10,7 @@ class AssignmentsController < ApplicationController
   # GET /assignments/1
   # GET /assignments/1.json
   def show
-    @students = @assignment.students
+    @students = @assignment.class_group.students
   end
 
 
@@ -26,17 +26,27 @@ class AssignmentsController < ApplicationController
   # POST /assignments
   # POST /assignments.json
   def create
-    debugger
-#    @assignment = Assignment.new(assignment_params)
-#    respond_to do |format|
-#      if @assignment.save
-#        format.html { redirect_to @assignment, notice: 'Assignment was successfully created.' }
-#        format.json { render :show, status: :created, location: @assignment }
-#      else
-#        format.html { render :new }
-#        format.json { render json: @assignment.errors, status: :unprocessable_entity }
-#      end
-#    end
+    saved = false
+    assignment_params["class_group_id"].each do |c|
+      @assignment  = Assignment.new
+      @assignment.test_id = assignment_params["test_id"]
+      @assignment.class_group_id = c
+      if @assignment.save
+        saved = true
+      end
+    end
+
+
+    @assignment = Assignment.new(assignment_params)
+    respond_to do |format|
+      if saved
+        format.html { redirect_to @assignment, notice: 'Assignment was successfully created.' }
+        format.json { render :show, status: :created, location: @assignment }
+      else
+        format.html { render :new }
+        format.json { render json: @assignment.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # PATCH/PUT /assignments/1
@@ -72,6 +82,6 @@ class AssignmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def assignment_params
-      params.require(:assignment).permit({:class_group_ids=>[]}, :test_id)
+      params.require(:assignment).permit(:test_id, {:class_group_id=>[]})
     end
 end
