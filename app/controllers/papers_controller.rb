@@ -27,7 +27,7 @@ class PapersController < ApplicationController
                   type: 'application/pdf',
                   disposition: 'inline'
         end
-      format.csv { send_data @paper.to_csv(@questions, @students) }
+      format.csv { send_data @paper.to_csv(@questions, @students), filename: "#{@assignment.class_group.name}_#{@paper.test.name}_#{@paper.name}"}
       format.xls
     end
   end
