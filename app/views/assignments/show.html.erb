@@ -26,6 +26,14 @@
       <%= link_to "Excel", assignment_paper_path(@assignment, p, format: :xlsx) %>
     </p>
 
+
+    <p>
+      Download cream_sheets:
+      <%= link_to "Printable Form (PDF)", assignment_paper_path(@assignment, p, format: 'pdf') %>
+
+    </p>
+
+
     <p>
     Upload results:
     <%= form_tag import_assignments_path, multipart: true do %>

@@ -15,21 +15,23 @@ class PapersController < ApplicationController
     @question = Question.new
     @question.paper_id = @paper.id
     @questions = @paper.questions.order(:order)
-    @assignment = Assignment.find(params[:assignment_id])
-    @students = @assignment.class_group.students.order(:last_name)
-    file_name = "#{@assignment.class_group.name}_#{@paper.test.name}_#{@paper.name}.xlsx"
+    if params.include?("assignment_id")
+      @assignment = Assignment.find(params[:assignment_id])
+      @students = @assignment.class_group.students.order(:last_name)
+      file_name = "#{@assignment.class_group.name}_#{@paper.test.name}_#{@paper.name}"
+    end
     respond_to do |format|
       format.html
       format.pdf do
-        pdf = PaperPdf.new(@paper)
+        pdf = PaperPdf.new(@paper, @assignment)
         send_data pdf.render,
-                  filename: "#{@paper.test.name}_#{@paper.name}",
+                  filename: file_name,
                   type: 'application/pdf',
                   disposition: 'inline'
         end
       format.csv { send_data @paper.to_csv(@questions, @students), filename: "#{@assignment.class_group.name}_#{@paper.test.name}_#{@paper.name}"}
       format.xlsx {
-  response.headers['Content-Disposition'] = 'attachment; filename="' + file_name + '"'
+  response.headers['Content-Disposition'] = 'attachment; filename="' + file_name + '.xlsx"'
 }
 
     end
@@ -97,5 +99,6 @@ class PapersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def paper_params
       params.require(:paper).permit(:name, :test_id)
+      debugger
     end
 end
