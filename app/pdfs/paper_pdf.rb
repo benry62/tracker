@@ -33,16 +33,39 @@ class PaperPdf < Prawn::Document
   def line_items(student)
     move_down 20
     #table([header_row], [header_row])
-    table(  [strap ],:column_widths => [139, 395], :cell_style => {:background_color => "afafaf", :font_style => :bold} )
-    table(  [header_row ],:column_widths => [55, 42, 42, 275, 50, 70], :cell_style => {:background_color => "cccccc"} )
+    table(  [strap ],:column_widths => [139, 395], :cell_style => {:background_color => "ccddff", :font_style => :bold} )
+    table(  [header_row ],:column_widths => [55, 42, 42, 275, 50, 70], :cell_style => {:background_color => "80aaff"} )
     table(  line_item_rows(student), :column_widths => [55, 42, 42, 275, 50, 70] )
-
   end
+
+  def set_bg_colour(result)
+    max_score = result.question.max_score
+    student_score = result.score
+    bg_color = "ff99dd"
+    if student_score == max_score
+      bg_color = "33cc33"
+
+    elsif student_score == 0
+      bg_color = "ff0000"
+
+    elsif student_score.between?(student_score, max_score)
+      bg_color = "ffff00"
+
+    end
+    bg_color
+  end
+
 
   def line_item_rows(student)
     app = []
     student.results.each do |item|
-      app<<[item.question.question_number, item.question.max_score, item.score, item.question.MW_text, item.question.MW_number, ""]
+      cell_1 = make_cell(:content => item.question.question_number)
+      cell_2 = make_cell(:content => item.question.max_score.to_s, :align => :center)
+      cell_3 = make_cell(:content => item.score.to_s, :align => :center, :background_color => set_bg_colour(item))
+      cell_4 = make_cell(:content => item.question.MW_text)
+      cell_5 = make_cell(:content => item.question.MW_number)
+      cell_6 = make_cell(:content => "")
+      app << [cell_1, cell_2, cell_3, cell_4, cell_5, cell_6]
     end
     app
   end
