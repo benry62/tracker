@@ -4,12 +4,14 @@ class ClassGroupsController < ApplicationController
   # GET /class_groups
   # GET /class_groups.json
   def index
-    @class_groups = ClassGroup.order(:year)
+    @class_groups = ClassGroup.order(:year, :name)
   end
 
   # GET /class_groups/1
   # GET /class_groups/1.json
   def show
+
+    @students = Student.where("class_group_id = ?", @class_group.id).order(:last_name)
   end
 
   # GET /class_groups/new

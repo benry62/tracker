@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resources :papers
   end
 
-  resources :results, :assignments do
+  resources :results, :assignments, :students do
     collection do
       post :import
     end

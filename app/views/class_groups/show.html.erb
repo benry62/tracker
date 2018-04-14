@@ -10,5 +10,14 @@
   <%= @class_group.year %>
 </p>
 
+<h3>Students </h3>
+<ol>
+<% @students.each do |student| %>
+  <li><%= link_to student.last_name + ", " + student.first_name, student %></li>
+<% end %>
+</ol>
+
+
+
 <%= link_to 'Edit', edit_class_group_path(@class_group) %> |
 <%= link_to 'Back', class_groups_path %>

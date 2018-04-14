@@ -7,6 +7,12 @@ class StudentsController < ApplicationController
     @students = Student.order(:last_name)
   end
 
+  def import
+    Student.import(params[:file])
+    redirect_to students_url, notice: 'Students imported.'
+  end
+
+
   # GET /students/1
   # GET /students/1.json
   def show

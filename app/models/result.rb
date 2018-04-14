@@ -20,9 +20,9 @@ class Result < ApplicationRecord
     header = spreadsheet.row(1)
     (2..spreadsheet.last_row).each do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
-      product = find_by(id: row["id"]) || new
-      product.attributes = row.to_hash
-      product.save!
+      result = find_by(student_id: row["student_id"]) || new
+      result.attributes = row.to_hash
+      result.save!
     end
   end
 
