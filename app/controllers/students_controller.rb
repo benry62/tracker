@@ -4,7 +4,7 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
-    @students = Student.order(:last_name)
+    @students = Student.order(:class_group_id, :last_name)
   end
 
   def import

@@ -99,6 +99,5 @@ class PapersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def paper_params
       params.require(:paper).permit(:name, :test_id)
-      debugger
     end
 end
